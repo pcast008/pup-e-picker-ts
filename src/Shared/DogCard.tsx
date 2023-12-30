@@ -47,7 +47,9 @@ export const DogCard = ({
       {/* Ignore this  */}
       {/* You can temporarily set a favorite overlay after a user favorites a dog */}
       {/* Try making className "favorite-overlay active"*/}
-      <div className={`favorite-overlay `}>{"<3"}</div>
+      <div className={`favorite-overlay ${isFavorite ? "active" : ""}`}>
+        {"<3"}
+      </div>
 
       {/* Ignore this  */}
       {/* You can temporarily set a favorite overlay after a user favorites a dog */}
@@ -57,7 +59,9 @@ export const DogCard = ({
       {/* Ignore this  */}
       {/* You can temporarily set a unfavorite overlay after a user favorites a dog */}
       {/* Try making className "unfavorite-overlay active"*/}
-      <div className="unfavorite-overlay">{"</3"}</div>
+      <div className={`unfavorite-overlay ${!isFavorite ? "active" : ""}`}>
+        {"</3"}
+      </div>
 
       {/* A Dogs Name */}
       <p className="dog-name">{name}</p>
