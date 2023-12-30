@@ -8,7 +8,7 @@ export const Requests = {
     return fetch(`${baseUrl}/dogs`)
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Error occurred getting data...");
+          throw new Error("Error occurred getting dogs.");
         } else {
           return response.json();
         }

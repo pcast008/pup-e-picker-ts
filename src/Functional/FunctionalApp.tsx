@@ -36,6 +36,7 @@ export function FunctionalApp() {
             data={favoritedDogs}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
+            setDogs={setDogs}
           />
         );
       case "unfavorited":
@@ -44,6 +45,7 @@ export function FunctionalApp() {
             data={unfavoritedDogs}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
+            setDogs={setDogs}
           />
         );
       case "createDog":
@@ -51,6 +53,7 @@ export function FunctionalApp() {
           <FunctionalCreateDogForm
             isLoading={isLoading}
             setIsLoading={setIsLoading}
+            setDogs={setDogs}
           />
         );
       default:
@@ -59,6 +62,7 @@ export function FunctionalApp() {
             data={dogs}
             isLoading={isLoading}
             setIsLoading={setIsLoading}
+            setDogs={setDogs}
           />
         );
     }

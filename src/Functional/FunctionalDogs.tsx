@@ -1,5 +1,4 @@
 import { DogCard } from "../Shared/DogCard";
-// import { dogPictures } from "../dog-pictures";
 import { Dog } from "../types";
 import { Requests } from "../api";
 
@@ -8,10 +7,12 @@ export const FunctionalDogs = ({
   data,
   isLoading,
   setIsLoading,
+  setDogs,
 }: {
   data: Dog[];
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
+  setDogs: (dogs: Dog[]) => void;
 }) => {
   return (
     //  the "<> </>"" are called react fragments, it's like adding all the html inside
@@ -31,23 +32,35 @@ export const FunctionalDogs = ({
             onTrashIconClick={() => {
               //   alert("clicked trash");
               setIsLoading(true);
-              Requests.deleteDog(dog.id).finally(() => {
-                setIsLoading(false);
-              });
+              Requests.deleteDog(dog.id)
+                .then(() => {
+                  Requests.getAllDogs().then(setDogs);
+                })
+                .finally(() => {
+                  setIsLoading(false);
+                });
             }}
             onHeartClick={() => {
               //   alert("clicked heart");
               setIsLoading(true);
-              Requests.updateDog(dog.id, !dog.isFavorite).finally(() => {
-                setIsLoading(false);
-              });
+              Requests.updateDog(dog.id, false)
+                .then(() => {
+                  Requests.getAllDogs().then(setDogs);
+                })
+                .finally(() => {
+                  setIsLoading(false);
+                });
             }}
             onEmptyHeartClick={() => {
               //   alert("clicked empty heart");
               setIsLoading(true);
-              Requests.updateDog(dog.id, !dog.isFavorite).finally(() => {
-                setIsLoading(false);
-              });
+              Requests.updateDog(dog.id, true)
+                .then(() => {
+                  Requests.getAllDogs().then(setDogs);
+                })
+                .finally(() => {
+                  setIsLoading(false);
+                });
             }}
             isLoading={isLoading}
           />

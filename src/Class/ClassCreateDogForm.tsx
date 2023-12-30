@@ -2,12 +2,14 @@ import { Component } from "react";
 import { dogPictures } from "../dog-pictures";
 import { Requests } from "../api";
 import toast from "react-hot-toast";
+import { Dog } from "../types";
 
 const defaultSelectedImage = dogPictures.BlueHeeler;
 
 type MyProps = {
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
+  setDogs: (dogs: Dog[]) => void;
 };
 
 type MyState = {
@@ -32,7 +34,7 @@ export class ClassCreateDogForm extends Component<MyProps> {
   };
 
   render() {
-    const { isLoading, setIsLoading } = this.props;
+    const { isLoading, setIsLoading, setDogs } = this.props;
     const { dogName, dogDescription, dogImage } = this.state;
 
     return (
@@ -52,6 +54,7 @@ export class ClassCreateDogForm extends Component<MyProps> {
                 toast.error(response);
               } else {
                 toast.success("Dog Created!");
+                Requests.getAllDogs().then(setDogs);
               }
             })
             .finally(() => {

@@ -48,6 +48,10 @@ export class ClassApp extends Component {
     this.setState({ activePage: activePage });
   };
 
+  setDogs = (dogs: string) => {
+    this.setState({ dogs: dogs });
+  };
+
   RenderedDogs = () => {
     switch (this.state.activePage) {
       case "favorited":
@@ -56,6 +60,7 @@ export class ClassApp extends Component {
             data={this.getFavoritedDogs()}
             isLoading={this.state.isLoading}
             setIsLoading={this.setIsLoading}
+            setDogs={this.setDogs}
           />
         );
       case "unfavorited":
@@ -64,6 +69,7 @@ export class ClassApp extends Component {
             data={this.getUnfavoritedDogs()}
             isLoading={this.state.isLoading}
             setIsLoading={this.setIsLoading}
+            setDogs={this.setDogs}
           />
         );
       case "createDog":
@@ -71,6 +77,7 @@ export class ClassApp extends Component {
           <ClassCreateDogForm
             isLoading={this.state.isLoading}
             setIsLoading={this.setIsLoading}
+            setDogs={this.setDogs}
           />
         );
       default:
@@ -79,6 +86,7 @@ export class ClassApp extends Component {
             data={this.state.dogs}
             isLoading={this.state.isLoading}
             setIsLoading={this.setIsLoading}
+            setDogs={this.setDogs}
           />
         );
     }
