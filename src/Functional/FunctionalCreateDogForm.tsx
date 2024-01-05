@@ -1,28 +1,25 @@
 import { dogPictures } from "../dog-pictures";
 import { useState } from "react";
-import { Requests } from "../api";
-import toast from "react-hot-toast";
-import { Dog } from "../types";
+import { CreateDog } from "../types";
 
 // use this as your default selected image
 const defaultSelectedImage = dogPictures.BlueHeeler;
 
 export const FunctionalCreateDogForm = ({
   isLoading,
-  setIsLoading,
-  setDogs,
+  createDog,
 }: {
   isLoading: boolean;
-  setIsLoading: (isLoading: boolean) => void;
-  setDogs: (dogs: Dog[]) => void;
+  createDog: CreateDog;
 }) => {
   const [dogName, setDogName] = useState("");
   const [dogDescription, setDogDescription] = useState("");
-  const [dogImage, setDogImage] = useState("");
+  const [dogImage, setDogImage] = useState(defaultSelectedImage);
 
   const resetForm = () => {
     setDogName("");
     setDogDescription("");
+    setDogImage(defaultSelectedImage);
   };
 
   return (
@@ -31,23 +28,11 @@ export const FunctionalCreateDogForm = ({
       id="create-dog-form"
       onSubmit={(e) => {
         e.preventDefault();
-        setIsLoading(true);
-        Requests.postDog({
+        createDog({
           name: dogName,
           description: dogDescription,
           image: dogImage,
-        })
-          .then((response) => {
-            if (typeof response === "string") {
-              toast.error(response);
-            } else {
-              toast.success("Dog Created!");
-              Requests.getAllDogs().then(setDogs);
-            }
-          })
-          .finally(() => {
-            setIsLoading(false);
-          });
+        });
         resetForm();
       }}
     >
@@ -59,6 +44,10 @@ export const FunctionalCreateDogForm = ({
         value={dogName}
         onChange={(e) => {
           setDogName(e.target.value);
+        }}
+        style={{
+          opacity: isLoading ? 0.5 : 1,
+          cursor: isLoading ? "not-allowed" : "",
         }}
       />
       <label htmlFor="description">Dog Description</label>
@@ -72,6 +61,10 @@ export const FunctionalCreateDogForm = ({
         onChange={(e) => {
           setDogDescription(e.target.value);
         }}
+        style={{
+          opacity: isLoading ? 0.5 : 1,
+          cursor: isLoading ? "not-allowed" : "",
+        }}
       ></textarea>
       <label htmlFor="picture">Select an Image</label>
       <select
@@ -79,15 +72,16 @@ export const FunctionalCreateDogForm = ({
         value={dogImage}
         onChange={(e) => {
           setDogImage(e.target.value);
+          console.log(e.target.value);
+        }}
+        style={{
+          opacity: isLoading ? 0.5 : 1,
+          cursor: isLoading ? "not-allowed" : "",
         }}
       >
         {Object.entries(dogPictures).map(([label, pictureValue]) => {
           return (
-            <option
-              defaultValue={defaultSelectedImage}
-              value={pictureValue}
-              key={pictureValue}
-            >
+            <option value={pictureValue} key={pictureValue}>
               {label}
             </option>
           );

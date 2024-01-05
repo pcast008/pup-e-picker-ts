@@ -1,22 +1,23 @@
 import { DogCard } from "../Shared/DogCard";
 import { Component } from "react";
-import { Requests } from "../api";
-import { Dog } from "../types";
+import { Dog, DogFunction } from "../types";
 
 type MyProps = {
-  data: Dog[];
+  dogs: Dog[];
   isLoading: boolean;
-  setIsLoading: (isLoading: boolean) => void;
-  setDogs: (dogs: Dog[]) => void;
+  deleteDog: DogFunction;
+  favoriteDog: DogFunction;
+  unfavoriteDog: DogFunction;
 };
 // Right now these dogs are constant, but in reality we should be getting these from our server
 export class ClassDogs extends Component<MyProps> {
   render() {
-    const { data, isLoading, setIsLoading, setDogs } = this.props;
+    const { dogs, isLoading, deleteDog, favoriteDog, unfavoriteDog } =
+      this.props;
 
     return (
       <>
-        {data.map((dog) => {
+        {dogs.map((dog) => {
           return (
             <DogCard
               dog={{
@@ -26,39 +27,18 @@ export class ClassDogs extends Component<MyProps> {
                 isFavorite: dog.isFavorite,
                 name: dog.name,
               }}
-              key={2}
+              key={dog.id}
               onTrashIconClick={() => {
                 // alert("clicked trash");
-                setIsLoading(true);
-                Requests.deleteDog(dog.id)
-                  .then(() => {
-                    Requests.getAllDogs().then(setDogs);
-                  })
-                  .finally(() => {
-                    setIsLoading(false);
-                  });
+                deleteDog(dog);
               }}
               onHeartClick={() => {
                 // alert("clicked heart");
-                setIsLoading(true);
-                Requests.updateDog(dog.id, false)
-                  .then(() => {
-                    Requests.getAllDogs().then(setDogs);
-                  })
-                  .finally(() => {
-                    setIsLoading(false);
-                  });
+                unfavoriteDog(dog);
               }}
               onEmptyHeartClick={() => {
                 // alert("clicked empty heart");
-                setIsLoading(true);
-                Requests.updateDog(dog.id, true)
-                  .then(() => {
-                    Requests.getAllDogs().then(setDogs);
-                  })
-                  .finally(() => {
-                    setIsLoading(false);
-                  });
+                favoriteDog(dog);
               }}
               isLoading={isLoading}
             />

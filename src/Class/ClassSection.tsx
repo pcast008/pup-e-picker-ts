@@ -1,14 +1,14 @@
 // you can use `ReactNode` to add a type to the children prop
 import { Component, ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Dog } from "../types";
+import { Dog, activePage } from "../types";
 
 type MyProps = {
   children: ReactNode;
   favoritedDogs: Dog[];
   unfavoritedDogs: Dog[];
-  activePage: string;
-  setActivePage: (arg: string) => void;
+  activePage: activePage;
+  setActivePage: (activePage: activePage) => void;
 };
 
 export class ClassSection extends Component<MyProps> {
@@ -38,7 +38,7 @@ export class ClassSection extends Component<MyProps> {
               }`}
               onClick={() => {
                 activePage === "favorited"
-                  ? setActivePage("")
+                  ? setActivePage("all")
                   : setActivePage("favorited");
               }}
             >
@@ -52,7 +52,7 @@ export class ClassSection extends Component<MyProps> {
               }`}
               onClick={() => {
                 activePage === "unfavorited"
-                  ? setActivePage("")
+                  ? setActivePage("all")
                   : setActivePage("unfavorited");
               }}
             >
@@ -64,7 +64,7 @@ export class ClassSection extends Component<MyProps> {
               }`}
               onClick={() => {
                 activePage === "createDog"
-                  ? setActivePage("")
+                  ? setActivePage("all")
                   : setActivePage("createDog");
               }}
             >

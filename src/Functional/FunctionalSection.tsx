@@ -1,7 +1,7 @@
 // you can use this type for react children if you so choose
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Dog } from "../types";
+import { Dog, activePage } from "../types";
 
 export const FunctionalSection = ({
   children,
@@ -13,8 +13,8 @@ export const FunctionalSection = ({
   children: ReactNode;
   favoritedDogs: Dog[];
   unfavoritedDogs: Dog[];
-  activePage: string;
-  setActivePage: (arg: string) => void;
+  activePage: activePage;
+  setActivePage: (input: activePage) => void;
 }) => {
   return (
     <section id="main-section">
@@ -29,7 +29,7 @@ export const FunctionalSection = ({
             className={`selector ${activePage === "favorited" ? "active" : ""}`}
             onClick={() => {
               activePage === "favorited"
-                ? setActivePage("")
+                ? setActivePage("all")
                 : setActivePage("favorited");
             }}
           >
@@ -43,7 +43,7 @@ export const FunctionalSection = ({
             }`}
             onClick={() => {
               activePage === "unfavorited"
-                ? setActivePage("")
+                ? setActivePage("all")
                 : setActivePage("unfavorited");
             }}
           >
@@ -53,7 +53,7 @@ export const FunctionalSection = ({
             className={`selector ${activePage === "createDog" ? "active" : ""}`}
             onClick={() => {
               activePage === "createDog"
-                ? setActivePage("")
+                ? setActivePage("all")
                 : setActivePage("createDog");
             }}
           >

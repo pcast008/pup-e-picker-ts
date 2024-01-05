@@ -1,123 +1,193 @@
 {
   "dogs": [
     {
-      "name": "Edward",
-      "image": "/assets/boxer.png",
-      "description": "psst times glaring gosh while alarmed for up",
+      "name": "Nigel",
+      "image": "/assets/cowardly.png",
+      "description": "rest recent meanwhile yahoo yuck beneficial yuck circa",
       "isFavorite": true,
       "id": 0
     },
     {
-      "name": "Aurelio",
-      "image": "/assets/chihuahua.avif",
-      "description": "incidentally an reset gosh really majestic whether behind",
+      "name": "Thelma",
+      "image": "/assets/cowardly.png",
+      "description": "calculator substantial simplistic amid everlasting",
       "isFavorite": false,
       "id": 1
     },
     {
-      "name": "Jasmin",
+      "name": "Nedra",
       "image": "/assets/chihuahua.avif",
-      "description": "defile inasmuch where above sharp",
+      "description": "bleat distinct loftily disregard carol",
       "isFavorite": true,
-      "id": 2
-    },
-    {
-      "name": "Jerrold",
-      "image": "/assets/corgi.png",
-      "description": "yowza real yieldingly determined toward finally hmph by",
-      "isFavorite": false,
       "id": 4
     },
     {
-      "name": "Casimir",
-      "image": "/assets/boxer.png",
-      "description": "mid seemingly murky failing free freelance kid gah",
+      "name": "Julien",
+      "image": "/assets/chihuahua.avif",
+      "description": "psst extremely meaty slow provided",
       "isFavorite": false,
+      "id": 6
+    },
+    {
+      "name": "Rebeka",
+      "image": "/assets/chihuahua.avif",
+      "description": "stash evenly ha fearless instead denim ugh toward",
+      "isFavorite": true,
       "id": 7
     },
     {
-      "name": "Rupert",
-      "image": "/assets/dalmation.png",
-      "description": "await rigidly even helpfully proud",
-      "isFavorite": true,
+      "name": "Sylvan",
+      "image": "/assets/cowardly.png",
+      "description": "bowler counterpoint worldly snore elf",
+      "isFavorite": false,
+      "id": 8
+    },
+    {
+      "name": "Guy",
+      "image": "/assets/cowardly.png",
+      "description": "hmph since gosh repulsive atop",
+      "isFavorite": false,
       "id": 9
     },
     {
-      "name": "Rudy",
-      "image": "/assets/chihuahua.avif",
-      "description": "yippee wrongly unto reboot mom incident balloonist",
+      "name": "Kelvin",
+      "image": "/assets/dalmation.png",
+      "description": "afterwards desert gosh vaguely itchy bah and",
       "isFavorite": true,
       "id": 10
     },
     {
-      "name": "Jared",
-      "image": "/assets/chihuahua.avif",
-      "description": "insect restfully obnoxiously midst whether",
+      "name": "Wilton",
+      "image": "/assets/corgi.png",
+      "description": "content always correctly or gee",
+      "isFavorite": true,
+      "id": 11
+    },
+    {
+      "name": "Roosevelt",
+      "image": "/assets/boxer.png",
+      "description": "curd usefully gosh measly frenetically oddball daily",
       "isFavorite": true,
       "id": 12
     },
     {
-      "name": "Green",
+      "name": "Kaylah",
       "image": "/assets/corgi.png",
-      "description": "finally crayon studious ick square skid unmask",
-      "isFavorite": true,
+      "description": "tide metallurgist deeply instead above surpass limply",
+      "isFavorite": false,
       "id": 13
     },
     {
-      "name": "Oswald",
-      "image": "/assets/chihuahua.avif",
-      "description": "page edger windsurf although second",
+      "name": "Antone",
+      "image": "/assets/blue-heeler.png",
+      "description": "mutt below backspace if metronome cultivar peer inasmuch",
       "isFavorite": true,
       "id": 14
     },
     {
-      "name": "Sigrid",
-      "image": "/assets/cowardly.png",
-      "description": "hurry extension quirkily whoa unfortunately monstrous communication note",
+      "name": "Myrtice",
+      "image": "/assets/dalmation.png",
+      "description": "behind vet infinite yoke unloosen",
       "isFavorite": true,
       "id": 15
     },
     {
-      "name": "Verlie",
-      "image": "/assets/boxer.png",
-      "description": "favorite thread supposing fatally gadzooks ashamed moon fortunately",
+      "name": "Lonny",
+      "image": "/assets/blue-heeler.png",
+      "description": "painfully bleakly wicked warmly ha tender wasteful",
       "isFavorite": true,
       "id": 16
     },
     {
-      "name": "Nasir",
-      "image": "/assets/boxer.png",
-      "description": "zowie variable hmph ew rightfully season gleaming millstone",
+      "name": "Kaela",
+      "image": "/assets/dalmation.png",
+      "description": "oof calibrate than anti fully",
       "isFavorite": true,
       "id": 17
     },
     {
-      "name": "Harmon",
-      "image": "/assets/chihuahua.avif",
-      "description": "how ack besides furthermore bellows estimate ugh",
-      "isFavorite": true,
+      "name": "Leonie",
+      "image": "/assets/blue-heeler.png",
+      "description": "arrogate bulb without exhibit unless",
+      "isFavorite": false,
       "id": 18
     },
     {
-      "name": "Raoul",
-      "image": "/assets/boxer.png",
-      "description": "provided microlending after indeed carelessly",
-      "isFavorite": false,
+      "name": "Irving",
+      "image": "/assets/blue-heeler.png",
+      "description": "for safely wisely along unimpressively gosh tiny",
+      "isFavorite": true,
       "id": 19
     },
     {
       "name": "Ronin",
-      "image": "/assets/corgi.png",
-      "description": "",
+      "image": "/assets/blue-heeler.png",
+      "description": "adasdasd",
       "isFavorite": false,
       "id": 20
     },
     {
       "name": "Dexter",
-      "image": "/assets/dalmation.png",
+      "image": "/assets/blue-heeler.png",
       "description": "",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 21
+    },
+    {
+      "name": "Heather",
+      "image": "/assets/corgi.png",
+      "description": "",
+      "isFavorite": false,
+      "id": 22
+    },
+    {
+      "name": "Lala",
+      "image": "/assets/blue-heeler.png",
+      "description": "sadfsdfsdf",
+      "isFavorite": false,
+      "id": 23
+    },
+    {
+      "name": "David",
+      "image": "/assets/dalmation.png",
+      "description": "fdsfsdfsdf",
+      "isFavorite": false,
+      "id": 24
+    },
+    {
+      "name": "Henry",
+      "image": "/assets/blue-heeler.png",
+      "description": "",
+      "isFavorite": false,
+      "id": 25
+    },
+    {
+      "name": "Gay Dog",
+      "image": "/assets/boxer.jpeg",
+      "description": "sdfsdfsdfdsfsdf",
+      "isFavorite": false,
+      "id": 26
+    },
+    {
+      "name": "LeanDRO",
+      "image": "/assets/blue-heeler.png",
+      "description": "Im gay",
+      "isFavorite": false,
+      "id": 27
+    },
+    {
+      "name": "TRUMP",
+      "image": "/assets/boxer.jpeg",
+      "description": "",
+      "isFavorite": false,
+      "id": 28
+    },
+    {
+      "name": "",
+      "image": "/assets/blue-heeler.png",
+      "description": "",
+      "isFavorite": false,
+      "id": 29
     }
   ]
 }

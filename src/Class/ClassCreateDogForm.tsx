@@ -1,15 +1,12 @@
 import { Component } from "react";
 import { dogPictures } from "../dog-pictures";
-import { Requests } from "../api";
-import toast from "react-hot-toast";
-import { Dog } from "../types";
+import { CreateDog } from "../types";
 
 const defaultSelectedImage = dogPictures.BlueHeeler;
 
 type MyProps = {
   isLoading: boolean;
-  setIsLoading: (isLoading: boolean) => void;
-  setDogs: (dogs: Dog[]) => void;
+  createDog: CreateDog;
 };
 
 type MyState = {
@@ -18,23 +15,23 @@ type MyState = {
   dogImage: string;
 };
 
-export class ClassCreateDogForm extends Component<MyProps> {
-  state: MyState = {
+export class ClassCreateDogForm extends Component<MyProps, MyState> {
+  state = {
     dogName: "",
     dogDescription: "",
-    dogImage: "",
+    dogImage: defaultSelectedImage,
   };
 
   resetForm = () => {
     this.setState({
       dogName: "",
       dogDescription: "",
-      dogImage: "",
+      dogImage: defaultSelectedImage,
     });
   };
 
   render() {
-    const { isLoading, setIsLoading, setDogs } = this.props;
+    const { isLoading, createDog } = this.props;
     const { dogName, dogDescription, dogImage } = this.state;
 
     return (
@@ -43,23 +40,11 @@ export class ClassCreateDogForm extends Component<MyProps> {
         id="create-dog-form"
         onSubmit={(e) => {
           e.preventDefault();
-          setIsLoading(true);
-          Requests.postDog({
-            name: this.state.dogName,
-            description: this.state.dogDescription,
-            image: this.state.dogImage,
-          })
-            .then((response) => {
-              if (typeof response === "string") {
-                toast.error(response);
-              } else {
-                toast.success("Dog Created!");
-                Requests.getAllDogs().then(setDogs);
-              }
-            })
-            .finally(() => {
-              setIsLoading(false);
-            });
+          createDog({
+            name: dogName,
+            description: dogDescription,
+            image: dogImage,
+          });
           this.resetForm();
         }}
       >
@@ -72,6 +57,10 @@ export class ClassCreateDogForm extends Component<MyProps> {
             this.setState({ dogName: e.target.value });
           }}
           disabled={isLoading}
+          style={{
+            opacity: isLoading ? 0.5 : 1,
+            cursor: isLoading ? "not-allowed" : "",
+          }}
         />
         <label htmlFor="description">Dog Description</label>
         <textarea
@@ -84,6 +73,10 @@ export class ClassCreateDogForm extends Component<MyProps> {
             this.setState({ dogDescription: e.target.value });
           }}
           disabled={isLoading}
+          style={{
+            opacity: isLoading ? 0.5 : 1,
+            cursor: isLoading ? "not-allowed" : "",
+          }}
         />
         <label htmlFor="picture">Select an Image</label>
         <select
@@ -92,6 +85,10 @@ export class ClassCreateDogForm extends Component<MyProps> {
             this.setState({ dogImage: e.target.value });
           }}
           disabled={isLoading}
+          style={{
+            opacity: isLoading ? 0.5 : 1,
+            cursor: isLoading ? "not-allowed" : "",
+          }}
         >
           {Object.entries(dogPictures).map(([label, pictureValue]) => {
             return (

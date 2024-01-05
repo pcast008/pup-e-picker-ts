@@ -2,20 +2,70 @@ import { FunctionalCreateDogForm } from "./FunctionalCreateDogForm";
 import { FunctionalDogs } from "./FunctionalDogs";
 import { FunctionalSection } from "./FunctionalSection";
 import { useEffect, useState } from "react";
-import { Dog } from "../types";
+import { CreateDog, Dog, DogFunction, activePage } from "../types";
 import { Requests } from "../api";
+import toast from "react-hot-toast";
 
 export function FunctionalApp() {
   const [dogs, setDogs] = useState<Dog[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [activePage, setActivePage] = useState("");
+  const [activePage, setActivePage] = useState<activePage>("all");
 
   const favoritedDogs = dogs.filter((dog) => dog.isFavorite);
   const unfavoritedDogs = dogs.filter((dog) => dog.isFavorite === false);
 
-  useEffect(() => {
+  const createDog: CreateDog = (dog) => {
     setIsLoading(true);
-    Requests.getAllDogs()
+    return Requests.postDog(dog)
+      .then((response) => {
+        if (typeof response === "string") {
+          toast.error(response);
+        } else {
+          toast.success("Dog Created!");
+          Requests.getAllDogs().then(setDogs);
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const unfavoriteDog: DogFunction = (input) => {
+    setIsLoading(true);
+    return Requests.updateDog(input.id, false)
+      .then(() => {
+        Requests.getAllDogs().then(setDogs);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const favoriteDog: DogFunction = (input) => {
+    setIsLoading(true);
+    return Requests.updateDog(input.id, true)
+      .then(() => {
+        Requests.getAllDogs().then(setDogs);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const deleteDog: DogFunction = (dog) => {
+    setIsLoading(true);
+    return Requests.deleteDog(dog.id)
+      .then(() => {
+        Requests.getAllDogs().then(setDogs);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const refetchDogs = () => {
+    setIsLoading(true);
+    return Requests.getAllDogs()
       .then((dogs) => {
         setDogs(dogs);
         setIsLoading(false);
@@ -26,47 +76,24 @@ export function FunctionalApp() {
       .finally(() => {
         setIsLoading(false);
       });
+  };
+
+  useEffect(() => {
+    refetchDogs();
   }, []);
 
-  const RenderedDogs = () => {
+  const filteredDogs = dogs.filter((dog) => {
     switch (activePage) {
+      case "all":
+        return true;
       case "favorited":
-        return (
-          <FunctionalDogs
-            data={favoritedDogs}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-            setDogs={setDogs}
-          />
-        );
+        return dog.isFavorite;
       case "unfavorited":
-        return (
-          <FunctionalDogs
-            data={unfavoritedDogs}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-            setDogs={setDogs}
-          />
-        );
+        return !dog.isFavorite;
       case "createDog":
-        return (
-          <FunctionalCreateDogForm
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-            setDogs={setDogs}
-          />
-        );
-      default:
-        return (
-          <FunctionalDogs
-            data={dogs}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-            setDogs={setDogs}
-          />
-        );
+        return false;
     }
-  };
+  });
 
   return (
     <div className="App" style={{ backgroundColor: "skyblue" }}>
@@ -79,7 +106,22 @@ export function FunctionalApp() {
         activePage={activePage}
         setActivePage={setActivePage}
       >
-        <RenderedDogs />
+        {activePage === "createDog" && (
+          <FunctionalCreateDogForm
+            isLoading={isLoading}
+            createDog={createDog}
+          />
+        )}
+
+        {activePage !== "createDog" && (
+          <FunctionalDogs
+            dogs={filteredDogs}
+            isLoading={isLoading}
+            deleteDog={deleteDog}
+            favoriteDog={favoriteDog}
+            unfavoriteDog={unfavoriteDog}
+          />
+        )}
       </FunctionalSection>
     </div>
   );

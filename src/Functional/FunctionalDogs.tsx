@@ -1,24 +1,25 @@
 import { DogCard } from "../Shared/DogCard";
-import { Dog } from "../types";
-import { Requests } from "../api";
+import { Dog, DogFunction } from "../types";
 
 // Right now these dogs are constant, but in reality we should be getting these from our server
 export const FunctionalDogs = ({
-  data,
+  dogs,
   isLoading,
-  setIsLoading,
-  setDogs,
+  deleteDog,
+  favoriteDog,
+  unfavoriteDog,
 }: {
-  data: Dog[];
+  dogs: Dog[];
   isLoading: boolean;
-  setIsLoading: (isLoading: boolean) => void;
-  setDogs: (dogs: Dog[]) => void;
+  deleteDog: DogFunction;
+  favoriteDog: DogFunction;
+  unfavoriteDog: DogFunction;
 }) => {
   return (
     //  the "<> </>"" are called react fragments, it's like adding all the html inside
     // without adding an actual html element
     <>
-      {data.map((dog) => {
+      {dogs.map((dog) => {
         return (
           <DogCard
             dog={{
@@ -31,36 +32,15 @@ export const FunctionalDogs = ({
             key={dog.id}
             onTrashIconClick={() => {
               //   alert("clicked trash");
-              setIsLoading(true);
-              Requests.deleteDog(dog.id)
-                .then(() => {
-                  Requests.getAllDogs().then(setDogs);
-                })
-                .finally(() => {
-                  setIsLoading(false);
-                });
+              deleteDog(dog);
             }}
             onHeartClick={() => {
               //   alert("clicked heart");
-              setIsLoading(true);
-              Requests.updateDog(dog.id, false)
-                .then(() => {
-                  Requests.getAllDogs().then(setDogs);
-                })
-                .finally(() => {
-                  setIsLoading(false);
-                });
+              unfavoriteDog(dog);
             }}
             onEmptyHeartClick={() => {
               //   alert("clicked empty heart");
-              setIsLoading(true);
-              Requests.updateDog(dog.id, true)
-                .then(() => {
-                  Requests.getAllDogs().then(setDogs);
-                })
-                .finally(() => {
-                  setIsLoading(false);
-                });
+              favoriteDog(dog);
             }}
             isLoading={isLoading}
           />

@@ -14,3 +14,9 @@ export type DogForCreate = {
 };
 
 export type SetDogs = (dogs: Dog[]) => void;
+
+export type activePage = "all" | "favorited" | "unfavorited" | "createDog";
+
+export type CreateDog = (dog: DogForCreate) => Promise<unknown>;
+
+export type DogFunction = (input: Dog) => Promise<unknown>;
