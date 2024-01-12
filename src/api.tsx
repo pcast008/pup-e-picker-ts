@@ -1,26 +1,23 @@
-import { DogForCreate } from "./types";
+import { CreateDogDTO, Dog } from "./types";
 
 export const baseUrl = "http://localhost:3000";
 
 export const Requests = {
   // should return a promise with all dogs in the database
-  getAllDogs: () => {
-    return fetch(`${baseUrl}/dogs`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Error occurred getting dogs.");
-        } else {
-          return response.json();
-        }
-      })
-      .catch((e) => {
-        return e.message;
-      });
+  getAllDogs: async (): Promise<string | Dog[]> => {
+    const response = await fetch(`${baseUrl}/dogs`);
+
+    if (!response.ok) {
+      const error = new Error("Error occurred getting dogs.");
+      return error.message;
+    } else {
+      return response.json();
+    }
   },
   // should create a dog in the database from a partial dog object
   // and return a promise with the result
-  postDog: (dog: DogForCreate) => {
-    return fetch(`${baseUrl}/dogs`, {
+  postDog: async (dog: CreateDogDTO) => {
+    const response = await fetch(`${baseUrl}/dogs`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,38 +28,32 @@ export const Requests = {
         description: dog.description,
         isFavorite: false,
       }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Error occurred creating new dog.");
-        } else {
-          return response.json();
-        }
-      })
-      .catch((e) => {
-        return e.message;
-      });
+    });
+
+    if (!response.ok) {
+      const err = new Error("Error occurred creating dog.");
+      return err.message;
+    } else {
+      return response.status;
+    }
   },
 
   // should delete a dog from the database
-  deleteDog: (id: number) => {
-    return fetch(`${baseUrl}/dogs/${id}`, {
+  deleteDog: async (id: number) => {
+    const response = await fetch(`${baseUrl}/dogs/${id}`, {
       method: "DELETE",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Error occurred deleting dog.");
-        } else {
-          return response.json();
-        }
-      })
-      .catch((e) => {
-        return e.message;
-      });
+    });
+
+    if (!response.ok) {
+      const err = new Error("Error occurred deleting dog.");
+      return err.message;
+    } else {
+      return response.status;
+    }
   },
 
-  updateDog: (id: number, isFavorite: boolean) => {
-    return fetch(`${baseUrl}/dogs/${id}`, {
+  updateDog: async (id: number, isFavorite: boolean) => {
+    const response = await fetch(`${baseUrl}/dogs/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -70,17 +61,14 @@ export const Requests = {
       body: JSON.stringify({
         isFavorite: isFavorite,
       }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Error occurred updating dog");
-        } else {
-          return response.json();
-        }
-      })
-      .catch((e) => {
-        return e.message;
-      });
+    });
+
+    if (!response.ok) {
+      const err = new Error("Error occurred updating dog.");
+      return err.message;
+    } else {
+      return response.status;
+    }
   },
 
   // Just a dummy function for use in the playground
@@ -88,12 +76,5 @@ export const Requests = {
     // console.log("dummy stuff");
     // Requests.updateDog(17, false);
     // Requests.deleteDog(18);
-    Requests.postDog({
-      name: "test",
-      description: "test",
-      image: "/assets/dalmation.png",
-    }).then((response) => {
-      console.log(response);
-    });
   },
 };

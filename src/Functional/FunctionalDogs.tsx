@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { DogCard } from "../Shared/DogCard";
 import { Dog, DogFunction } from "../types";
 
@@ -8,12 +9,14 @@ export const FunctionalDogs = ({
   deleteDog,
   favoriteDog,
   unfavoriteDog,
+  setIsLoading,
 }: {
   dogs: Dog[];
   isLoading: boolean;
   deleteDog: DogFunction;
   favoriteDog: DogFunction;
   unfavoriteDog: DogFunction;
+  setIsLoading: (value: boolean) => void;
 }) => {
   return (
     //  the "<> </>"" are called react fragments, it's like adding all the html inside
@@ -32,15 +35,45 @@ export const FunctionalDogs = ({
             key={dog.id}
             onTrashIconClick={() => {
               //   alert("clicked trash");
-              deleteDog(dog);
+              deleteDog(dog)
+                .then((response) => {
+                  if (typeof response === "string") {
+                    toast.error(response);
+                    setIsLoading(false);
+                  }
+                })
+                .catch(() => {
+                  toast.error("Server error.");
+                  setIsLoading(false);
+                });
             }}
             onHeartClick={() => {
               //   alert("clicked heart");
-              unfavoriteDog(dog);
+              unfavoriteDog(dog)
+                .then((response) => {
+                  if (typeof response === "string") {
+                    toast.error(response);
+                    setIsLoading(false);
+                  }
+                })
+                .catch(() => {
+                  toast.error("Server error.");
+                  setIsLoading(false);
+                });
             }}
             onEmptyHeartClick={() => {
               //   alert("clicked empty heart");
-              favoriteDog(dog);
+              favoriteDog(dog)
+                .then((response) => {
+                  if (typeof response === "string") {
+                    toast.error(response);
+                    setIsLoading(false);
+                  }
+                })
+                .catch(() => {
+                  toast.error("Server error.");
+                  setIsLoading(false);
+                });
             }}
             isLoading={isLoading}
           />

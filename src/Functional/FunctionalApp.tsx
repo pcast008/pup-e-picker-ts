@@ -2,84 +2,58 @@ import { FunctionalCreateDogForm } from "./FunctionalCreateDogForm";
 import { FunctionalDogs } from "./FunctionalDogs";
 import { FunctionalSection } from "./FunctionalSection";
 import { useEffect, useState } from "react";
-import { CreateDog, Dog, DogFunction, activePage } from "../types";
+import { CreateDogFn, Dog, DogFunction, ActivePage } from "../types";
 import { Requests } from "../api";
 import toast from "react-hot-toast";
 
 export function FunctionalApp() {
   const [dogs, setDogs] = useState<Dog[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [activePage, setActivePage] = useState<activePage>("all");
+  const [activePage, setActivePage] = useState<ActivePage>("all");
 
   const favoritedDogs = dogs.filter((dog) => dog.isFavorite);
   const unfavoritedDogs = dogs.filter((dog) => dog.isFavorite === false);
 
-  const createDog: CreateDog = (dog) => {
+  const createDog: CreateDogFn = async (dog) => {
     setIsLoading(true);
-    return Requests.postDog(dog)
-      .then((response) => {
-        if (typeof response === "string") {
-          toast.error(response);
-        } else {
-          toast.success("Dog Created!");
-          Requests.getAllDogs().then(setDogs);
-        }
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    const response = await Requests.postDog(dog);
+    typeof response !== "string" && (await refetchDogs());
+    return response;
   };
 
-  const unfavoriteDog: DogFunction = (input) => {
+  const unfavoriteDog: DogFunction = async (input) => {
     setIsLoading(true);
-    return Requests.updateDog(input.id, false)
-      .then(() => {
-        Requests.getAllDogs().then(setDogs);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    const response = await Requests.updateDog(input.id, false);
+    typeof response !== "string" && (await refetchDogs());
+    return response;
   };
 
-  const favoriteDog: DogFunction = (input) => {
+  const favoriteDog: DogFunction = async (input) => {
     setIsLoading(true);
-    return Requests.updateDog(input.id, true)
-      .then(() => {
-        Requests.getAllDogs().then(setDogs);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    const response = await Requests.updateDog(input.id, true);
+    typeof response !== "string" && (await refetchDogs());
+    return response;
   };
 
-  const deleteDog: DogFunction = (dog) => {
+  const deleteDog: DogFunction = async (dog) => {
     setIsLoading(true);
-    return Requests.deleteDog(dog.id)
-      .then(() => {
-        Requests.getAllDogs().then(setDogs);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    const response = await Requests.deleteDog(dog.id);
+    typeof response !== "string" && (await refetchDogs());
+    return response;
   };
 
-  const refetchDogs = () => {
-    setIsLoading(true);
-    return Requests.getAllDogs()
-      .then((dogs) => {
-        setDogs(dogs);
-        setIsLoading(false);
-      })
-      .catch((e) => {
-        alert(e.message);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+  const refetchDogs = async () => {
+    const response = await Requests.getAllDogs();
+    typeof response === "string" ? toast.error(response) : setDogs(response);
+    setIsLoading(false);
   };
 
   useEffect(() => {
-    refetchDogs();
+    setIsLoading(true);
+    refetchDogs().catch(() => {
+      toast.error("Server error.");
+      setIsLoading(false);
+    });
   }, []);
 
   const filteredDogs = dogs.filter((dog) => {
@@ -110,6 +84,7 @@ export function FunctionalApp() {
           <FunctionalCreateDogForm
             isLoading={isLoading}
             createDog={createDog}
+            setIsLoading={setIsLoading}
           />
         )}
 
@@ -120,6 +95,7 @@ export function FunctionalApp() {
             deleteDog={deleteDog}
             favoriteDog={favoriteDog}
             unfavoriteDog={unfavoriteDog}
+            setIsLoading={setIsLoading}
           />
         )}
       </FunctionalSection>

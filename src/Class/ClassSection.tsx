@@ -1,14 +1,14 @@
 // you can use `ReactNode` to add a type to the children prop
 import { Component, ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Dog, activePage } from "../types";
+import { Dog, ActivePage } from "../types";
 
 type MyProps = {
   children: ReactNode;
   favoritedDogs: Dog[];
   unfavoritedDogs: Dog[];
-  activePage: activePage;
-  setActivePage: (activePage: activePage) => void;
+  activePage: ActivePage;
+  setActivePage: (activePage: ActivePage) => void;
 };
 
 export class ClassSection extends Component<MyProps> {

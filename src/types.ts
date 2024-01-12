@@ -7,16 +7,12 @@ export type Dog = {
   isFavorite: boolean;
 };
 
-export type DogForCreate = {
-  name: string;
-  image: string;
-  description: string;
-};
+export type CreateDogDTO = Omit<Dog, "id" | "isFavorite">;
 
 export type SetDogs = (dogs: Dog[]) => void;
 
-export type activePage = "all" | "favorited" | "unfavorited" | "createDog";
+export type ActivePage = "all" | "favorited" | "unfavorited" | "createDog";
 
-export type CreateDog = (dog: DogForCreate) => Promise<unknown>;
+export type CreateDogFn = (dog: CreateDogDTO) => Promise<string | number>;
 
-export type DogFunction = (input: Dog) => Promise<unknown>;
+export type DogFunction = (input: Dog) => Promise<string | number>;

@@ -1,7 +1,7 @@
 // you can use this type for react children if you so choose
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Dog, activePage } from "../types";
+import { Dog, ActivePage } from "../types";
 
 export const FunctionalSection = ({
   children,
@@ -13,8 +13,8 @@ export const FunctionalSection = ({
   children: ReactNode;
   favoritedDogs: Dog[];
   unfavoritedDogs: Dog[];
-  activePage: activePage;
-  setActivePage: (input: activePage) => void;
+  activePage: ActivePage;
+  setActivePage: (input: ActivePage) => void;
 }) => {
   return (
     <section id="main-section">

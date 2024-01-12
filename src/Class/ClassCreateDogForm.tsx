@@ -1,12 +1,14 @@
 import { Component } from "react";
 import { dogPictures } from "../dog-pictures";
-import { CreateDog } from "../types";
+import { CreateDogFn } from "../types";
+import toast from "react-hot-toast";
 
 const defaultSelectedImage = dogPictures.BlueHeeler;
 
 type MyProps = {
   isLoading: boolean;
-  createDog: CreateDog;
+  createDog: CreateDogFn;
+  setIsLoading: (value: boolean) => void;
 };
 
 type MyState = {
@@ -31,7 +33,7 @@ export class ClassCreateDogForm extends Component<MyProps, MyState> {
   };
 
   render() {
-    const { isLoading, createDog } = this.props;
+    const { isLoading, createDog, setIsLoading } = this.props;
     const { dogName, dogDescription, dogImage } = this.state;
 
     return (
@@ -44,8 +46,20 @@ export class ClassCreateDogForm extends Component<MyProps, MyState> {
             name: dogName,
             description: dogDescription,
             image: dogImage,
-          });
-          this.resetForm();
+          })
+            .then((response) => {
+              if (typeof response === "string") {
+                toast.error(response);
+                setIsLoading(false);
+              } else {
+                toast.success("Dog created!");
+                this.resetForm();
+              }
+            })
+            .catch(() => {
+              toast.error("Server error.");
+              setIsLoading(false);
+            });
         }}
       >
         <h4>Create a New Dog</h4>

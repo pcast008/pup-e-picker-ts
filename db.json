@@ -1,1 +1,172 @@
-{"dogs":[{"name":"Jamil","image":"/assets/corgi.png","description":"unless gelding waterskiing after hollow","isFavorite":false,"id":0},{"name":"Jevon","image":"/assets/cowardly.png","description":"in respire hmph for duh","isFavorite":false,"id":1},{"name":"Bailey","image":"/assets/chihuahua.avif","description":"onto likewise outstay gadzooks oof so eek","isFavorite":false,"id":2},{"name":"Florida","image":"/assets/blue-heeler.png","description":"yowza shyly fooey easy highlight when insist","isFavorite":true,"id":3},{"name":"Nikita","image":"/assets/blue-heeler.png","description":"after boohoo tighten track oof maggot lest doorpost","isFavorite":true,"id":4},{"name":"Maxwell","image":"/assets/boxer.png","description":"gosh when cricket conga to if hopelessly times","isFavorite":false,"id":5},{"name":"Polly","image":"/assets/dalmation.png","description":"towards incentive loving onto angry","isFavorite":false,"id":6},{"name":"Rupert","image":"/assets/cowardly.png","description":"pfft and kissingly husky whoa","isFavorite":true,"id":7},{"name":"Alda","image":"/assets/boxer.png","description":"provided suspiciously yippee triangle daily eek commandment caper","isFavorite":true,"id":8},{"name":"Anthony","image":"/assets/dalmation.png","description":"gee ugh cosset at apud","isFavorite":false,"id":9},{"name":"Carolanne","image":"/assets/cowardly.png","description":"against under utterly rock cultivated malfunction bog since","isFavorite":true,"id":10},{"name":"Estrella","image":"/assets/chihuahua.avif","description":"peanut renaissance although glaring overjoyed","isFavorite":true,"id":11},{"name":"Adam","image":"/assets/blue-heeler.png","description":"spending mid altruistic greedily valiantly following literate","isFavorite":true,"id":12},{"name":"Isai","image":"/assets/chihuahua.avif","description":"intently brain even plush pish","isFavorite":false,"id":13},{"name":"Bryana","image":"/assets/corgi.png","description":"pro different despite tame exile considerate excepting valiantly","isFavorite":true,"id":14},{"name":"Lila","image":"/assets/chihuahua.avif","description":"hm brightly immediately engage shyly","isFavorite":false,"id":15},{"name":"Anita","image":"/assets/boxer.png","description":"potable yippee versus dangerous round truly never","isFavorite":false,"id":16},{"name":"Julian","image":"/assets/cowardly.png","description":"who comfortable geez exonerate partially","isFavorite":false,"id":17},{"name":"Porter","image":"/assets/boxer.png","description":"yowza gee whoever solid whereas till shocked","isFavorite":false,"id":18},{"name":"Elnora","image":"/assets/cowardly.png","description":"bah rectangular mull ferociously gee gosh ignite director","isFavorite":true,"id":19}]}
+{
+  "dogs": [
+    {
+      "name": "Alda",
+      "image": "/assets/boxer.png",
+      "description": "provided suspiciously yippee triangle daily eek commandment caper",
+      "isFavorite": false,
+      "id": 8
+    },
+    {
+      "name": "Adam",
+      "image": "/assets/blue-heeler.png",
+      "description": "spending mid altruistic greedily valiantly following literate",
+      "isFavorite": false,
+      "id": 12
+    },
+    {
+      "name": "Julian",
+      "image": "/assets/cowardly.png",
+      "description": "who comfortable geez exonerate partially",
+      "isFavorite": true,
+      "id": 17
+    },
+    {
+      "name": "Elnora",
+      "image": "/assets/cowardly.png",
+      "description": "bah rectangular mull ferociously gee gosh ignite director",
+      "isFavorite": false,
+      "id": 19
+    },
+    {
+      "name": "Elsa",
+      "image": "/assets/corgi.png",
+      "description": "asdasdasd",
+      "isFavorite": true,
+      "id": 20
+    },
+    {
+      "name": "sdfsdfsdf",
+      "image": "/assets/boxer.jpeg",
+      "description": "sdfdsfsdfdsf",
+      "isFavorite": true,
+      "id": 21
+    },
+    {
+      "name": "Robin",
+      "image": "/assets/blue-heeler.png",
+      "description": "",
+      "isFavorite": true,
+      "id": 22
+    },
+    {
+      "name": "Robin",
+      "image": "/assets/blue-heeler.png",
+      "description": "",
+      "isFavorite": true,
+      "id": 23
+    },
+    {
+      "name": "asdasdasd",
+      "image": "/assets/blue-heeler.png",
+      "description": "",
+      "isFavorite": false,
+      "id": 24
+    },
+    {
+      "name": "sdfsdfdsf",
+      "image": "/assets/blue-heeler.png",
+      "description": "",
+      "isFavorite": true,
+      "id": 25
+    },
+    {
+      "name": "sdfsdftruytrytryrty",
+      "image": "/assets/blue-heeler.png",
+      "description": "",
+      "isFavorite": true,
+      "id": 26
+    },
+    {
+      "name": "435645656",
+      "image": "/assets/blue-heeler.png",
+      "description": "45645645",
+      "isFavorite": true,
+      "id": 27
+    },
+    {
+      "name": "979789",
+      "image": "/assets/blue-heeler.png",
+      "description": "789789789",
+      "isFavorite": true,
+      "id": 28
+    },
+    {
+      "name": "4325345",
+      "image": "/assets/blue-heeler.png",
+      "description": "34543545",
+      "isFavorite": true,
+      "id": 29
+    },
+    {
+      "name": "4325345",
+      "image": "/assets/blue-heeler.png",
+      "description": "3454",
+      "isFavorite": false,
+      "id": 31
+    },
+    {
+      "name": "345345",
+      "image": "/assets/blue-heeler.png",
+      "description": "345",
+      "isFavorite": false,
+      "id": 32
+    },
+    {
+      "name": "ertert",
+      "image": "/assets/blue-heeler.png",
+      "description": "ertert",
+      "isFavorite": false,
+      "id": 33
+    },
+    {
+      "name": "23434",
+      "image": "/assets/blue-heeler.png",
+      "description": "",
+      "isFavorite": false,
+      "id": 34
+    },
+    {
+      "name": "Ronin",
+      "image": "/assets/boxer.jpeg",
+      "description": "",
+      "isFavorite": false,
+      "id": 35
+    },
+    {
+      "name": "w345324423",
+      "image": "/assets/blue-heeler.png",
+      "description": "4234",
+      "isFavorite": false,
+      "id": 36
+    },
+    {
+      "name": "457567567567",
+      "image": "/assets/blue-heeler.png",
+      "description": "",
+      "isFavorite": false,
+      "id": 37
+    },
+    {
+      "name": "456456546",
+      "image": "/assets/blue-heeler.png",
+      "description": "456456",
+      "isFavorite": false,
+      "id": 38
+    },
+    {
+      "name": "456456",
+      "image": "/assets/blue-heeler.png",
+      "description": "6456456",
+      "isFavorite": false,
+      "id": 39
+    },
+    {
+      "name": "345345",
+      "image": "/assets/boxer.jpeg",
+      "description": "345",
+      "isFavorite": false,
+      "id": 40
+    }
+  ]
+}
