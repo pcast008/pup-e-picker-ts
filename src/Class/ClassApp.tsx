@@ -2,7 +2,7 @@ import { Component } from "react";
 import { ClassSection } from "./ClassSection";
 import { ClassDogs } from "./ClassDogs";
 import { ClassCreateDogForm } from "./ClassCreateDogForm";
-import { CreateDogFn, Dog, DogFunction, ActivePage } from "../types";
+import { Dog, ActivePage, CreateDogDTO } from "../types";
 import { Requests } from "../api";
 import toast from "react-hot-toast";
 
@@ -27,49 +27,67 @@ export class ClassApp extends Component<Record<string, never>, MyState> {
     return this.state.dogs.filter((dog) => dog.isFavorite === false);
   };
 
-  favoriteDog: DogFunction = async (dog) => {
+  favoriteDog = (dog: Dog): Promise<unknown> => {
     this.setIsLoading(true);
-    const response = await Requests.updateDog(dog.id, true);
-    typeof response !== "string" && (await this.refetchDogs());
-    return response;
+    return Requests.updateDog(dog.id, true)
+      .then(this.refetchDogs)
+      .catch(() => {
+        toast.error("Error favoriting dog.");
+      })
+      .finally(() => {
+        this.setIsLoading(false);
+      });
   };
 
-  unfavoriteDog: DogFunction = async (dog) => {
+  unfavoriteDog = async (dog: Dog): Promise<unknown> => {
     this.setIsLoading(true);
-    const response = await Requests.updateDog(dog.id, false);
-    typeof response !== "string" && (await this.refetchDogs());
-    return response;
+    return Requests.updateDog(dog.id, false)
+      .then(this.refetchDogs)
+      .catch(() => {
+        toast.error("Error unfavoriting dog.");
+      })
+      .finally(() => {
+        this.setIsLoading(false);
+      });
   };
 
-  createDog: CreateDogFn = async (dog) => {
+  createDog = (dog: CreateDogDTO): Promise<unknown> => {
     this.setIsLoading(true);
-    const response = await Requests.postDog(dog);
-    typeof response !== "string" && (await this.refetchDogs());
-    return response;
+    return Requests.postDog(dog)
+      .then(() => {
+        return this.refetchDogs();
+      })
+      .finally(() => {
+        this.setIsLoading(false);
+      });
   };
 
-  deleteDog: DogFunction = async (dog) => {
+  deleteDog = (dog: Dog): Promise<unknown> => {
     this.setIsLoading(true);
-    const response = await Requests.deleteDog(dog.id);
-    typeof response !== "string" && (await this.refetchDogs());
-    return response;
+    return Requests.deleteDog(dog.id)
+      .then(this.refetchDogs)
+      .catch(() => {
+        toast.error("Error deleting dog.");
+      })
+      .finally(() => {
+        this.setIsLoading(false);
+      });
   };
 
-  refetchDogs = async () => {
-    this.setState({ isLoading: true });
-    const response = await Requests.getAllDogs();
-    typeof response === "string"
-      ? toast.error(response)
-      : this.setDogs(response);
-    this.setIsLoading(false);
+  refetchDogs = () => {
+    this.setIsLoading(true);
+    return Requests.getAllDogs()
+      .then((res) => this.setDogs(res))
+      .catch(() => {
+        toast.error("Error getting dogs.");
+      })
+      .finally(() => {
+        this.setIsLoading(false);
+      });
   };
 
   componentDidMount() {
-    this.setIsLoading(true);
-    this.refetchDogs().catch(() => {
-      toast.error("Server error.");
-      this.setIsLoading(false);
-    });
+    this.refetchDogs();
   }
 
   setIsLoading = (isLoading: boolean) => {
@@ -113,7 +131,6 @@ export class ClassApp extends Component<Record<string, never>, MyState> {
             <ClassCreateDogForm
               isLoading={this.state.isLoading}
               createDog={this.createDog}
-              setIsLoading={this.setIsLoading}
             />
           )}
 
@@ -124,7 +141,6 @@ export class ClassApp extends Component<Record<string, never>, MyState> {
               deleteDog={this.deleteDog}
               favoriteDog={this.favoriteDog}
               unfavoriteDog={this.unfavoriteDog}
-              setIsLoading={this.setIsLoading}
             />
           )}
         </ClassSection>

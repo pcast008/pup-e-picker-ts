@@ -1,23 +1,22 @@
-import { CreateDogDTO, Dog } from "./types";
+import { CreateDogDTO } from "./types";
 
 export const baseUrl = "http://localhost:3000";
 
 export const Requests = {
   // should return a promise with all dogs in the database
-  getAllDogs: async (): Promise<string | Dog[]> => {
-    const response = await fetch(`${baseUrl}/dogs`);
-
-    if (!response.ok) {
-      const error = new Error("Error occurred getting dogs.");
-      return error.message;
-    } else {
-      return response.json();
-    }
+  getAllDogs: () => {
+    return fetch(`${baseUrl}/dogs`).then((res) => {
+      if (!res.ok) {
+        throw new Error("Error occurred getting dogs.");
+      } else {
+        return res.json();
+      }
+    });
   },
   // should create a dog in the database from a partial dog object
   // and return a promise with the result
-  postDog: async (dog: CreateDogDTO) => {
-    const response = await fetch(`${baseUrl}/dogs`, {
+  postDog: (dog: CreateDogDTO): Promise<unknown> => {
+    return fetch(`${baseUrl}/dogs`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,32 +27,30 @@ export const Requests = {
         description: dog.description,
         isFavorite: false,
       }),
+    }).then((res) => {
+      if (!res.ok) {
+        throw new Error("Error occurred creating dog.");
+      } else {
+        return res;
+      }
     });
-
-    if (!response.ok) {
-      const err = new Error("Error occurred creating dog.");
-      return err.message;
-    } else {
-      return response.status;
-    }
   },
 
   // should delete a dog from the database
-  deleteDog: async (id: number) => {
-    const response = await fetch(`${baseUrl}/dogs/${id}`, {
+  deleteDog: (id: number): Promise<unknown> => {
+    return fetch(`${baseUrl}/dogs/${id}`, {
       method: "DELETE",
+    }).then((res) => {
+      if (!res.ok) {
+        throw new Error("Error occurred deleting dog.");
+      } else {
+        return res;
+      }
     });
-
-    if (!response.ok) {
-      const err = new Error("Error occurred deleting dog.");
-      return err.message;
-    } else {
-      return response.status;
-    }
   },
 
-  updateDog: async (id: number, isFavorite: boolean) => {
-    const response = await fetch(`${baseUrl}/dogs/${id}`, {
+  updateDog: (id: number, isFavorite: boolean): Promise<unknown> => {
+    return fetch(`${baseUrl}/dogs/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -61,14 +58,13 @@ export const Requests = {
       body: JSON.stringify({
         isFavorite: isFavorite,
       }),
+    }).then((res) => {
+      if (!res.ok) {
+        throw new Error("Error occurred updating dog.");
+      } else {
+        return res;
+      }
     });
-
-    if (!response.ok) {
-      const err = new Error("Error occurred updating dog.");
-      return err.message;
-    } else {
-      return response.status;
-    }
   },
 
   // Just a dummy function for use in the playground

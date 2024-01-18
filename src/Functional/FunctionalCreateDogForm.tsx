@@ -1,6 +1,6 @@
 import { dogPictures } from "../dog-pictures";
 import { useState } from "react";
-import { CreateDogFn } from "../types";
+import { CreateDogDTO } from "../types";
 import toast from "react-hot-toast";
 
 // use this as your default selected image
@@ -9,11 +9,9 @@ const defaultSelectedImage = dogPictures.BlueHeeler;
 export const FunctionalCreateDogForm = ({
   isLoading,
   createDog,
-  setIsLoading,
 }: {
   isLoading: boolean;
-  createDog: CreateDogFn;
-  setIsLoading: (value: boolean) => void;
+  createDog: (dog: CreateDogDTO) => Promise<unknown>;
 }) => {
   const [dogName, setDogName] = useState("");
   const [dogDescription, setDogDescription] = useState("");
@@ -36,18 +34,12 @@ export const FunctionalCreateDogForm = ({
           description: dogDescription,
           image: dogImage,
         })
-          .then((response) => {
-            if (typeof response === "string") {
-              toast.error(response);
-              setIsLoading(false);
-            } else {
-              toast.success("Dog created!");
-              resetForm();
-            }
+          .then(() => {
+            toast.success("Dog created!");
+            resetForm();
           })
           .catch(() => {
-            toast.error("Server error.");
-            setIsLoading(false);
+            toast.error("Error creating dog.");
           });
       }}
     >

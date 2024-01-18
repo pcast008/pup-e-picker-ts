@@ -1,14 +1,13 @@
 import { Component } from "react";
 import { dogPictures } from "../dog-pictures";
-import { CreateDogFn } from "../types";
+import { CreateDogDTO } from "../types";
 import toast from "react-hot-toast";
 
 const defaultSelectedImage = dogPictures.BlueHeeler;
 
 type MyProps = {
   isLoading: boolean;
-  createDog: CreateDogFn;
-  setIsLoading: (value: boolean) => void;
+  createDog: (dog: CreateDogDTO) => Promise<unknown>;
 };
 
 type MyState = {
@@ -18,7 +17,7 @@ type MyState = {
 };
 
 export class ClassCreateDogForm extends Component<MyProps, MyState> {
-  state = {
+  state: MyState = {
     dogName: "",
     dogDescription: "",
     dogImage: defaultSelectedImage,
@@ -33,7 +32,7 @@ export class ClassCreateDogForm extends Component<MyProps, MyState> {
   };
 
   render() {
-    const { isLoading, createDog, setIsLoading } = this.props;
+    const { isLoading, createDog } = this.props;
     const { dogName, dogDescription, dogImage } = this.state;
 
     return (
@@ -47,18 +46,12 @@ export class ClassCreateDogForm extends Component<MyProps, MyState> {
             description: dogDescription,
             image: dogImage,
           })
-            .then((response) => {
-              if (typeof response === "string") {
-                toast.error(response);
-                setIsLoading(false);
-              } else {
-                toast.success("Dog created!");
-                this.resetForm();
-              }
+            .then(() => {
+              toast.success("Dog created!");
+              this.resetForm();
             })
             .catch(() => {
-              toast.error("Server error.");
-              setIsLoading(false);
+              toast.error("Error creating dog.");
             });
         }}
       >

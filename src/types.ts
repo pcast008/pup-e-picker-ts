@@ -9,10 +9,10 @@ export type Dog = {
 
 export type CreateDogDTO = Omit<Dog, "id" | "isFavorite">;
 
-export type SetDogs = (dogs: Dog[]) => void;
+// export type SetDogs = (dogs: Dog[]) => void;
 
 export type ActivePage = "all" | "favorited" | "unfavorited" | "createDog";
 
-export type CreateDogFn = (dog: CreateDogDTO) => Promise<string | number>;
+// export type CreateDogFn = (dog: CreateDogDTO) => Promise<unknown>;
 
-export type DogFunction = (input: Dog) => Promise<string | number>;
+// export type DogFunction = (input: Dog) => Promise<string | number>;

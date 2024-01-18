@@ -1,27 +1,19 @@
 import { DogCard } from "../Shared/DogCard";
 import { Component } from "react";
-import { Dog, DogFunction } from "../types";
-import toast from "react-hot-toast";
+import { Dog } from "../types";
 
 type MyProps = {
   dogs: Dog[];
   isLoading: boolean;
-  deleteDog: DogFunction;
-  favoriteDog: DogFunction;
-  unfavoriteDog: DogFunction;
-  setIsLoading: (value: boolean) => void;
+  deleteDog: (dog: Dog) => Promise<unknown>;
+  favoriteDog: (dog: Dog) => Promise<unknown>;
+  unfavoriteDog: (dog: Dog) => Promise<unknown>;
 };
 // Right now these dogs are constant, but in reality we should be getting these from our server
 export class ClassDogs extends Component<MyProps> {
   render() {
-    const {
-      dogs,
-      isLoading,
-      deleteDog,
-      favoriteDog,
-      unfavoriteDog,
-      setIsLoading,
-    } = this.props;
+    const { dogs, isLoading, deleteDog, favoriteDog, unfavoriteDog } =
+      this.props;
 
     return (
       <>
@@ -38,45 +30,15 @@ export class ClassDogs extends Component<MyProps> {
               key={dog.id}
               onTrashIconClick={() => {
                 // alert("clicked trash");
-                deleteDog(dog)
-                  .then((response) => {
-                    if (typeof response === "string") {
-                      toast.error(response);
-                      setIsLoading(false);
-                    }
-                  })
-                  .catch(() => {
-                    toast.error("Server error.");
-                    setIsLoading(false);
-                  });
+                deleteDog(dog);
               }}
               onHeartClick={() => {
                 // alert("clicked heart");
-                unfavoriteDog(dog)
-                  .then((response) => {
-                    if (typeof response === "string") {
-                      toast.error(response);
-                      setIsLoading(false);
-                    }
-                  })
-                  .catch(() => {
-                    toast.error("Server error.");
-                    setIsLoading(false);
-                  });
+                unfavoriteDog(dog);
               }}
               onEmptyHeartClick={() => {
                 // alert("clicked empty heart");
-                favoriteDog(dog)
-                  .then((response) => {
-                    if (typeof response === "string") {
-                      toast.error(response);
-                      setIsLoading(false);
-                    }
-                  })
-                  .catch(() => {
-                    toast.error("Server error.");
-                    setIsLoading(false);
-                  });
+                favoriteDog(dog);
               }}
               isLoading={isLoading}
             />

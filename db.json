@@ -1,25 +1,11 @@
 {
   "dogs": [
     {
-      "name": "Alda",
-      "image": "/assets/boxer.png",
-      "description": "provided suspiciously yippee triangle daily eek commandment caper",
-      "isFavorite": false,
-      "id": 8
-    },
-    {
       "name": "Adam",
       "image": "/assets/blue-heeler.png",
       "description": "spending mid altruistic greedily valiantly following literate",
-      "isFavorite": false,
-      "id": 12
-    },
-    {
-      "name": "Julian",
-      "image": "/assets/cowardly.png",
-      "description": "who comfortable geez exonerate partially",
       "isFavorite": true,
-      "id": 17
+      "id": 12
     },
     {
       "name": "Elnora",
@@ -27,48 +13,6 @@
       "description": "bah rectangular mull ferociously gee gosh ignite director",
       "isFavorite": false,
       "id": 19
-    },
-    {
-      "name": "Elsa",
-      "image": "/assets/corgi.png",
-      "description": "asdasdasd",
-      "isFavorite": true,
-      "id": 20
-    },
-    {
-      "name": "sdfsdfsdf",
-      "image": "/assets/boxer.jpeg",
-      "description": "sdfdsfsdfdsf",
-      "isFavorite": true,
-      "id": 21
-    },
-    {
-      "name": "Robin",
-      "image": "/assets/blue-heeler.png",
-      "description": "",
-      "isFavorite": true,
-      "id": 22
-    },
-    {
-      "name": "Robin",
-      "image": "/assets/blue-heeler.png",
-      "description": "",
-      "isFavorite": true,
-      "id": 23
-    },
-    {
-      "name": "asdasdasd",
-      "image": "/assets/blue-heeler.png",
-      "description": "",
-      "isFavorite": false,
-      "id": 24
-    },
-    {
-      "name": "sdfsdfdsf",
-      "image": "/assets/blue-heeler.png",
-      "description": "",
-      "isFavorite": true,
-      "id": 25
     },
     {
       "name": "sdfsdftruytrytryrty",
@@ -109,21 +53,21 @@
       "name": "345345",
       "image": "/assets/blue-heeler.png",
       "description": "345",
-      "isFavorite": false,
+      "isFavorite": true,
       "id": 32
     },
     {
       "name": "ertert",
       "image": "/assets/blue-heeler.png",
       "description": "ertert",
-      "isFavorite": false,
+      "isFavorite": true,
       "id": 33
     },
     {
       "name": "23434",
       "image": "/assets/blue-heeler.png",
       "description": "",
-      "isFavorite": false,
+      "isFavorite": true,
       "id": 34
     },
     {
@@ -137,7 +81,7 @@
       "name": "w345324423",
       "image": "/assets/blue-heeler.png",
       "description": "4234",
-      "isFavorite": false,
+      "isFavorite": true,
       "id": 36
     },
     {
@@ -167,6 +111,62 @@
       "description": "345",
       "isFavorite": false,
       "id": 40
+    },
+    {
+      "name": "asfdasdasd",
+      "image": "/assets/blue-heeler.png",
+      "description": "asdasd",
+      "isFavorite": false,
+      "id": 41
+    },
+    {
+      "name": "sdfsdf",
+      "image": "/assets/blue-heeler.png",
+      "description": "sdfdsf",
+      "isFavorite": false,
+      "id": 42
+    },
+    {
+      "name": "sdfsdf",
+      "image": "/assets/blue-heeler.png",
+      "description": "sdfsdfsdf",
+      "isFavorite": false,
+      "id": 43
+    },
+    {
+      "name": "sdfdsf",
+      "image": "/assets/blue-heeler.png",
+      "description": "sdfsdfsdf",
+      "isFavorite": false,
+      "id": 44
+    },
+    {
+      "name": "asdasdasd",
+      "image": "/assets/blue-heeler.png",
+      "description": "",
+      "isFavorite": false,
+      "id": 45
+    },
+    {
+      "name": "azsfddsafsd",
+      "image": "/assets/blue-heeler.png",
+      "description": "fdsfdsf",
+      "isFavorite": false,
+      "id": 46
+    },
+    {
+      "name": "asfdasdfasd",
+      "image": "/assets/blue-heeler.png",
+      "description": "sadasdasd",
+      "isFavorite": false,
+      "id": 47
+    },
+    {
+      "name": "sdfsdfdsf",
+      "image": "/assets/blue-heeler.png",
+      "description": "",
+      "isFavorite": false,
+      "id": 48
     }
   ]
 }

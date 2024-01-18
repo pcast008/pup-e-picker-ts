@@ -2,7 +2,7 @@ import { FunctionalCreateDogForm } from "./FunctionalCreateDogForm";
 import { FunctionalDogs } from "./FunctionalDogs";
 import { FunctionalSection } from "./FunctionalSection";
 import { useEffect, useState } from "react";
-import { CreateDogFn, Dog, DogFunction, ActivePage } from "../types";
+import { Dog, ActivePage, CreateDogDTO } from "../types";
 import { Requests } from "../api";
 import toast from "react-hot-toast";
 
@@ -14,46 +14,65 @@ export function FunctionalApp() {
   const favoritedDogs = dogs.filter((dog) => dog.isFavorite);
   const unfavoritedDogs = dogs.filter((dog) => dog.isFavorite === false);
 
-  const createDog: CreateDogFn = async (dog) => {
+  const createDog = (dog: CreateDogDTO): Promise<unknown> => {
     setIsLoading(true);
-    const response = await Requests.postDog(dog);
-    typeof response !== "string" && (await refetchDogs());
-    return response;
+    return Requests.postDog(dog)
+      .then(() => {
+        return refetchDogs();
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
-  const unfavoriteDog: DogFunction = async (input) => {
+  const unfavoriteDog = (dog: Dog): Promise<unknown> => {
     setIsLoading(true);
-    const response = await Requests.updateDog(input.id, false);
-    typeof response !== "string" && (await refetchDogs());
-    return response;
+    return Requests.updateDog(dog.id, false)
+      .then(refetchDogs)
+      .catch(() => {
+        toast.error("Error unfavoriting dog.");
+      })
+      .finally(() => setIsLoading(false));
   };
 
-  const favoriteDog: DogFunction = async (input) => {
+  const favoriteDog = (dog: Dog): Promise<unknown> => {
     setIsLoading(true);
-    const response = await Requests.updateDog(input.id, true);
-    typeof response !== "string" && (await refetchDogs());
-    return response;
+    return Requests.updateDog(dog.id, true)
+      .then(refetchDogs)
+      .catch(() => {
+        toast.error("Error favoriting dog.");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
-  const deleteDog: DogFunction = async (dog) => {
+  const deleteDog = (dog: Dog): Promise<unknown> => {
     setIsLoading(true);
-    const response = await Requests.deleteDog(dog.id);
-    typeof response !== "string" && (await refetchDogs());
-    return response;
+    return Requests.deleteDog(dog.id)
+      .then(refetchDogs)
+      .catch(() => {
+        toast.error("Error deleting dog.");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
-  const refetchDogs = async () => {
-    const response = await Requests.getAllDogs();
-    typeof response === "string" ? toast.error(response) : setDogs(response);
-    setIsLoading(false);
+  const refetchDogs = (): Promise<unknown> => {
+    setIsLoading(true);
+    return Requests.getAllDogs()
+      .then((res) => setDogs(res))
+      .catch(() => {
+        toast.error("Error getting dogs.");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
-    setIsLoading(true);
-    refetchDogs().catch(() => {
-      toast.error("Server error.");
-      setIsLoading(false);
-    });
+    refetchDogs();
   }, []);
 
   const filteredDogs = dogs.filter((dog) => {
@@ -84,7 +103,6 @@ export function FunctionalApp() {
           <FunctionalCreateDogForm
             isLoading={isLoading}
             createDog={createDog}
-            setIsLoading={setIsLoading}
           />
         )}
 
@@ -95,7 +113,6 @@ export function FunctionalApp() {
             deleteDog={deleteDog}
             favoriteDog={favoriteDog}
             unfavoriteDog={unfavoriteDog}
-            setIsLoading={setIsLoading}
           />
         )}
       </FunctionalSection>
